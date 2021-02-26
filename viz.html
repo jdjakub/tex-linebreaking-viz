@@ -7,8 +7,8 @@
     text { fill: black; }
     tspan { font-weight: bold; }
     .desired-line { fill: lightgray; height: 10px; }
-    .rigid { y: 10px; fill: black; height: 10px; }
-    .spring { y: 10px; fill: lightgray; height: 20px; }
+    .rigid { y: 15px; fill: black; height: 15px; }
+    .spring { y: 20px; fill: lightgray; height: 20px; }
     .focus { fill: gray; }
     .mark { stroke: black; }
     .min {}
@@ -18,7 +18,7 @@
     .spring.debt { height: 10px; }
     .mark.debt { stroke: #e37d00; }
     .excess { fill: #2599ff; }
-    .spring.excess { y: 30px; height: 10px; }
+    .spring.excess { y: 20px; height: 10px; }
     .mark.excess { stroke: #006fd0; }
     </style>
   </head>
@@ -28,7 +28,7 @@
     <svg id="svg" width="800" height="600">
       <rect class="desired-line" x="30" y="30" width="500" />
       <g transform="translate(30,60)">
-      <text x="520" y="20">
+      <text x="520" y="30">
         <tspan class="debt">315</tspan>/<tspan class="focus">60</tspan> = 5.25
       </text>
       <text>The</text>
@@ -37,13 +37,13 @@
       <rect class="spring focus" width="40" />
       <rect class="spring debt" width="125" />
       <rect class="spring" width="20" />
-      <line class="mark min" x1="10" x2="10" y1="10" y2="30" />
-      <line class="mark nat" x1="20" x2="20" y1="10" y2="30" />
-      <line class="mark max" x1="40" x2="40" y1="10" y2="30" />
-      <line class="mark debt" x1="60" x2="60" y1="10" y2="20" />
-      <line class="mark debt" x1="80" x2="80" y1="10" y2="20" />
-      <line class="mark debt" x1="100" x2="100" y1="10" y2="20" />
-      <line class="mark debt" x1="120" x2="120" y1="10" y2="20" />
+      <line class="mark min" x1="10" x2="10" y1="20" y2="40" />
+      <line class="mark nat" x1="20" x2="20" y1="20" y2="40" />
+      <line class="mark max" x1="40" x2="40" y1="20" y2="40" />
+      <line class="mark debt" x1="60" x2="60" y1="20" y2="30" />
+      <line class="mark debt" x1="80" x2="80" y1="20" y2="30" />
+      <line class="mark debt" x1="100" x2="100" y1="20" y2="30" />
+      <line class="mark debt" x1="120" x2="120" y1="20" y2="30" />
       <g transform="translate(125,0)">
       <text>quick</text>
       <rect class="rigid" width="37" />
@@ -51,13 +51,13 @@
       <rect class="spring focus" width="40" />
       <rect class="spring debt" width="125" />
       <rect class="spring" width="20" />
-      <line class="mark min" x1="10" x2="10" y1="10" y2="30" />
-      <line class="mark nat" x1="20" x2="20" y1="10" y2="30" />
-      <line class="mark max" x1="40" x2="40" y1="10" y2="30" />
-      <line class="mark debt" x1="60" x2="60" y1="10" y2="20" />
-      <line class="mark debt" x1="80" x2="80" y1="10" y2="20" />
-      <line class="mark debt" x1="100" x2="100" y1="10" y2="20" />
-      <line class="mark debt" x1="120" x2="120" y1="10" y2="20" />
+      <line class="mark min" x1="10" x2="10" y1="20" y2="40" />
+      <line class="mark nat" x1="20" x2="20" y1="20" y2="40" />
+      <line class="mark max" x1="40" x2="40" y1="20" y2="40" />
+      <line class="mark debt" x1="60" x2="60" y1="20" y2="30" />
+      <line class="mark debt" x1="80" x2="80" y1="20" y2="30" />
+      <line class="mark debt" x1="100" x2="100" y1="20" y2="30" />
+      <line class="mark debt" x1="120" x2="120" y1="20" y2="30" />
       <g transform="translate(125,0)">
       <text>brown</text>
       <rect class="rigid" width="42" />
@@ -65,13 +65,13 @@
       <rect class="spring focus" width="40" />
       <rect class="spring debt" width="125" />
       <rect class="spring" width="20" />
-      <line class="mark min" x1="10" x2="10" y1="10" y2="30" />
-      <line class="mark nat" x1="20" x2="20" y1="10" y2="30" />
-      <line class="mark max" x1="40" x2="40" y1="10" y2="30" />
-      <line class="mark debt" x1="60" x2="60" y1="10" y2="20" />
-      <line class="mark debt" x1="80" x2="80" y1="10" y2="20" />
-      <line class="mark debt" x1="100" x2="100" y1="10" y2="20" />
-      <line class="mark debt" x1="120" x2="120" y1="10" y2="20" />
+      <line class="mark min" x1="10" x2="10" y1="20" y2="40" />
+      <line class="mark nat" x1="20" x2="20" y1="20" y2="40" />
+      <line class="mark max" x1="40" x2="40" y1="20" y2="40" />
+      <line class="mark debt" x1="60" x2="60" y1="20" y2="30" />
+      <line class="mark debt" x1="80" x2="80" y1="20" y2="30" />
+      <line class="mark debt" x1="100" x2="100" y1="20" y2="30" />
+      <line class="mark debt" x1="120" x2="120" y1="20" y2="30" />
       <g transform="translate(125,0)">
       <text>fox</text>
       <rect class="rigid" width="20" />
@@ -79,31 +79,31 @@
       <g transform="translate(0,50)">
       <rect class="desired-line" width="200" />
       <g transform="translate(0,30)">
-      <text x="520" y="20">
+      <text x="520" y="30">
         <tspan class="excess">-64</tspan>/<tspan class="focus">40</tspan> = -1.6
       </text>
       <text>The</text>
       <rect class="rigid" width="26" />
       <g transform="translate(26,0)">
       <rect class="spring focus" width="80" />
-      <rect class="spring" width="40" />
-      <rect class="spring excess" x="48" width="32" />
-      <line class="mark min" x1="60" x2="60" y1="10" y2="30" />
-      <line class="mark nat" x1="80" x2="80" y1="10" y2="40" />
-      <line class="mark excess" x1="60" x2="60" y1="30" y2="40" />
+      <rect class="spring" width="60" />
+      <line class="mark min" x1="60" x2="60" y1="20" y2="40" />
+      <line class="mark nat" x1="80" x2="80" y1="20" y2="40" />
       <g transform="translate(48,0)">
       <text>quick</text>
       <rect class="rigid" width="37" />
+      <rect class="spring excess" width="32" />
+      <line class="mark excess" x1="12" x2="12" y1="20" y2="30" />
       <g transform="translate(37,0)">
       <rect class="spring focus" width="80" />
-      <rect class="spring" width="40" />
-      <rect class="spring excess" x="48" width="32" />
-      <line class="mark min" x1="60" x2="60" y1="10" y2="30" />
-      <line class="mark nat" x1="80" x2="80" y1="10" y2="40" />
-      <line class="mark excess" x1="60" x2="60" y1="30" y2="40" />
+      <rect class="spring" width="60" />
+      <line class="mark min" x1="60" x2="60" y1="20" y2="40" />
+      <line class="mark nat" x1="80" x2="80" y1="20" y2="40" />
       <g transform="translate(48,0)">
       <text>brown</text>
       <rect class="rigid" width="42" />
+      <rect class="spring excess" width="32" />
+      <line class="mark excess" x1="12" x2="12" y1="20" y2="30" />
       <g transform="translate(42,0)">
       </g></g></g></g></g>
       </g>
