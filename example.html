@@ -7,8 +7,8 @@
     text { fill: black; }
     tspan { font-weight: bold; }
     .desired-line { fill: lightgray; height: 10px; }
-    .rigid { fill: black; height: 15px; }
-    .spring { fill: lightgray; height: 20px; }
+    .rigid { y: 15px; fill: black; height: 15px; }
+    .spring { y: 20px; fill: lightgray; height: 20px; }
     .focus { fill: gray; }
     .mark { stroke: black; }
     .min {}
@@ -23,7 +23,6 @@
     </style>
   </head>
   <body>
-    <div><textarea id="words">The quick brown fox jumped over the lazy dog</textarea></div>
     <svg id="svg" width="800" height="600">
       <rect class="desired-line" x="30" y="30" width="500" />
       <g transform="translate(30,60)">
@@ -108,7 +107,5 @@
       </g>
       </g>
       </g>
-    </svg>
-    <script type="text/javascript" src="viz.js"></script>
   </body>
 </html>
