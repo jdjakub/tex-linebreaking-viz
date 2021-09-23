@@ -99,3 +99,136 @@ addGlue(10, 20, 40, 'shrink');
 addWord('brown');
 addGlue(10, 20, 40);
 addWord('fox');
+
+/*
+box w; min w; nat w; max w; stretch w; box w ...
+*/
+
+line = {
+  width: 500,
+  blocks: ['The', [10,10,20,105], 'quick', [10,10,20,105], 'brown', [10,10,20,105], 'fox'],
+  spatial: undefined,
+};
+
+canvas = {
+};
+canvas.elem = document.getElementById('canvas');
+canvas.ctx = canvas.elem.getContext('2d');
+
+// Hi-DPI stuff
+dpr = window.devicePixelRatio || 1;
+bcr = canvas.elem.getBoundingClientRect();
+canvas.elem.width = bcr.width * dpr;
+canvas.elem.height = bcr.height * dpr;
+canvas.ctx.scale(dpr, dpr);
+canvas.elem.style.width = bcr.width + 'px';
+canvas.elem.style.height = bcr.height + 'px';
+
+drop = y => canvas.ctx.translate(0, +y);
+rise = y => drop(-y);
+advance = x => canvas.ctx.translate(+x, 0);
+back = x => advance(-x);
+
+canvas.ctx.font = '16px serif';
+
+function rnd() {
+  const LH = 10;
+  const c = canvas.ctx;
+  c.clearRect(0, 0, canvas.elem.width, canvas.elem.height);
+  c.save();
+
+  c.fillStyle = 'lightgray';
+  c.fillRect(0, 0, line.width, LH); drop(LH);
+
+  drop(40);
+  line.spatial = [];
+
+  for (let block of line.blocks) {
+    if (typeof block === 'string') {
+      const metrics = c.measureText(block);
+      const w = metrics.width;
+      line.spatial.push(w);
+      c.fillStyle = 'black';
+      c.fillText(block, 0, 0);
+      drop(10);
+        c.fillRect(0, 0, w, LH*1.5); advance(w);
+      rise(10);
+    } else {
+      const [toMin, toNat, toMax, stretch] = block;
+      c.fillStyle = 'lightgray';
+      drop(10);
+        c.fillStyle = 'lightgray';
+        c.fillRect(0, 0, toMin, LH*2); advance(toMin);
+        c.fillRect(0, 0, toNat, LH*2); advance(toNat);
+        c.fillRect(0, 0, toMax, LH*2);
+        drop(LH/2);
+          if (stretch < 0) {
+            c.fillStyle = '#2599ff';
+            c.fillRect(stretch, 0, -stretch, LH);
+          } else {
+            c.fillStyle = 'orange';
+            c.fillRect(0, 0, stretch, LH);
+          }
+        rise(LH/2); back(toNat);
+        c.fillStyle = 'black';
+        c.fillRect(-1, 0, 1, LH*2); advance(toNat);
+        c.fillRect(-1, 0, 2, LH*2); advance(toMax);
+        c.fillRect(-1, 0, 1, LH*2); back(toMax);
+        advance(stretch);
+      rise(10);
+      line.spatial.push(block);
+    }
+  }
+
+  c.restore();
+}
+
+function pick(x,y) {
+  for (let i=0; i<line.spatial.length; i++) {
+    const block = line.spatial[i];
+    if (typeof block === 'number') {
+      x -= block; if (x < 0) return [i];
+    } else {
+      const [toMin, toNat, toMax, stretch] = block;
+      x -= toMin; if (x < 0) return [i, 0];
+      x -= toNat; if (x < 0) return [i, 1];
+      x -= toMax; if (x < 0) return [i, 2];
+      x -= stretch; if (x < 0) return [i, 3];
+    }
+  }
+  return [];
+}
+
+dragging = [];
+compensating = [];
+
+canvas.elem.onmousedown = e => {
+  const [x,y] = [e.clientX-bcr.x, e.clientY-bcr.y];
+  const [i,j] = pick(x,y);
+  dragging = [i,j];
+  if (i !== undefined && i > 0 && i < line.spatial.length-1) {
+    if (j === 3) {
+      if (i + 2 > line.spatial.length-1) compensating = [i-2, 3];
+      else compensating = [i+2, 3];
+    }
+  }
+};
+
+canvas.elem.onmouseup = e => {
+  dragging = []; compensating = [];
+};
+
+canvas.elem.onmousemove = e => {
+  const [dx,dy] = [e.movementX, e.movementY];
+  const [i,j] = dragging;
+  const [ci,cj] = compensating;
+  if (i !== undefined && j !== undefined) {
+    line.spatial[i][j] += dx;
+  }
+  if (ci != undefined && cj !== undefined) {
+    line.spatial[ci][cj] -= dx;
+  }
+  rnd();
+};
+
+rnd();

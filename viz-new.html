@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <meta charset="utf-8" />
+  <head>
+    <title>Knuth-Plass visualization</title>
+    <style>
+    * {
+      box-sizing: border-box;
+    }
+    #lines {
+      width: 500px;
+    }
+    .desired-line {
+      background-color: lightgray;
+      height: 10px;
+    }
+    .item {
+      display: inline-block;
+      vertical-align: top;
+    }
+    .word {
+    }
+    .rigid {
+      height: 5px;
+      background-color: black;
+    }
+    .spacer {
+      display: inline-block;
+    }
+    .container {
+      position: relative;
+      display: inline-block;
+    }
+    .container > .glue {
+      position: absolute;
+      width: max-content;
+      top: 10px;
+    }
+    .glue {
+      height: 20px;
+    }
+    .min {
+      display: inline-block;
+      background-color: lightgray;
+      border-right: 1px solid black;
+    }
+    .nat {
+      display: inline-block;
+      background-color: lightgray;
+      border-right: 2px solid black;
+    }
+    .max {
+      display: inline-block;
+      background-color: lightgray;
+      border-right: 1px solid black;
+    }
+    .stretch {
+      background-color: orange;
+      opacity: 90%;
+      display: inline-block;
+      height: 10px;
+      margin-bottom: 5px;
+    }
+    .shrink {
+      background-color: #2599ff;
+      opacity: 90%;
+      display: inline-block;
+      height: 10px;
+      margin-bottom: 5px;
+    }
+    .container > .stretch {
+      position: absolute;
+      bottom: 0px;
+    }
+    .container > .shrink {
+      position: absolute;
+      bottom: 0px;
+    }
+
+    </style>
+  </head>
+  <body>
+    <div id="lines">
+      <div class="desired-line"></div>
+      <div class="line">
+        <div class="word item">
+          <div class="text">The</div>
+          <div class="rigid"></div>
+        </div
+        ><div class="container">
+          <div class="glue item">
+            <div class="min glue" style="width: 10px"></div
+            ><div class="nat glue" style="width: 10px"></div
+            ><div class="container">
+              <div class="stretch"  style="width: 100px"></div
+            ></div
+            ><div class="max glue" style="width: 20px"></div>
+          </div>
+        </div
+        ><div class="spacer" style="width: 120px"></div
+        ><div class="word item">
+          <div class="text">quick</div>
+          <div class="rigid"></div>
+        </div
+        ><div class="container">
+          <div class="glue item">
+            <div class="min glue" style="width: 80px"></div
+            ><div class="nat glue" style="width: 10px"></div
+            ><div class="container">
+              <div class="shrink"  style="right: 0px; width: 30px"></div
+            ></div
+            ><div class="max glue" style="opacity: 30%; width: 20px"></div>
+          </div>
+        </div
+        ><div class="spacer" style="width: 60px"></div
+        ><div class="word item">
+          <div class="text">brown</div>
+          <div class="rigid"></div>
+        </div>
+      </div>
+    </div>
+    <!--<script type="text/javascript" src="viz.js"></script>-->
+  </body>
+</html>
