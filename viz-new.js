@@ -1,5 +1,5 @@
 // ### UTILITIES
-
+DEBUG = () => { debugger; };
 log = (...args) => { console.log(...args); return args ? args[0] : undefined };
 final = arr => arr[arr.length-1]
 
@@ -79,11 +79,11 @@ function newGlue(toMin, toNat, toMax, stretch) {
 }
 
 newWord('The');
-newGlue(10, 10, 20, 100);
+newGlue(10, 10, 20, 0);
 newWord('quick');
-newGlue(10, 10, 20, 100);
+newGlue(10, 10, 20, 0);
 newWord('brown');
-newGlue(10, 10, 20, 100);
+newGlue(10, 10, 20, 0);
 newWord('fox');
 
 curr_line = line2;
@@ -94,3 +94,43 @@ newGlue(40, 10, 20, -30);
 newWord('brown');
 newGlue(40, 10, 20, -30);
 newWord('fox');
+
+clwidth = e => e.getBoundingClientRect().width;
+Array.prototype.sum = function() {
+  return this.reduce((acc, w) => acc + w,0);
+}
+
+function distribute(line) {
+  const total_space = clwidth(line.querySelector('.desired-line'));
+  const total_words = Array.from(line.querySelectorAll('.rigid'))
+    .map(clwidth).sum();
+  const ideal_glue = Array.from(line.querySelectorAll('.min.glue, .nat.glue'))
+    .map(clwidth).sum();
+  const total_glue = total_space - total_words;
+  const excess_glue = total_glue - ideal_glue;
+  if (excess_glue >= 0.0) { // stretch
+    const total_stretchability = Array.from(line.querySelectorAll('.max.glue'))
+      .map(clwidth).sum();
+    Array.from(line.querySelectorAll('.glue.item')).forEach(item => {
+      const stretchability = clwidth(item.querySelector('.max.glue'));
+      const proportion = stretchability / total_stretchability;
+      const actual_stretch = excess_glue * proportion;
+      // update stretch bar
+      item.querySelector('.stretch-shrink').style.width = actual_stretch+'px';
+      const nat_glue = clwidth(item.querySelector('.min.glue'))
+                     + clwidth(item.querySelector('.nat.glue'));
+      const actual_glue = nat_glue + actual_stretch;
+      // update .spacer
+      item.parentElement.nextElementSibling.style.width = actual_glue+'px';
+    });
+    const stretch_amt = line.querySelector('.stretch-amt');
+    const denom = line.querySelector('.denom');
+    const quotient = line.querySelector('.quotient');
+    stretch_amt.textContent = Math.round(excess_glue);
+    denom.textContent = Math.round(total_stretchability);
+    const ratio = excess_glue / total_stretchability;
+    quotient.textContent = ratio.toPrecision(2);
+  } else { // shrink
+    throw "Oops";
+  }
+}
