@@ -8,7 +8,6 @@
     .desired-line {
       background-color: lightgray;
       height: 10px;
-      width: 500px;
       margin-top: 30px;
     }
     .item {
@@ -44,13 +43,16 @@
       display: inline-block;
       background-color: lightgray;
       border-right: 1px solid black;
+      opacity: 50%;
     }
     .stretch-shrink {
       opacity: 90%;
       display: inline-block;
       height: 10px;
     }
-    .container > .stretch-shrink { position: absolute; bottom: 5px; }
+    .container > .stretch-shrink {
+      position: absolute; bottom: 5px; z-index: 10;
+    }
     .stretch > .stretch-shrink { background-color: orange; }
     .shrink > .stretch-shrink { background-color: #2599ff; }
     .shrink + .max { opacity: 30%; }
@@ -62,13 +64,13 @@
   <body>
     <div id="lines">
       <div class="line" id="line1">
-        <div class="desired-line"></div>
+        <div class="desired-line" style="width: 600px"></div>
         <span class="ratio">
           <span class="stretch-amt">300</span>/<span class="denom">60</span> = <span class="quotient">5.0</span>
         </span>
       </div>
       <div class="line" id="line2">
-        <div class="desired-line"></div>
+        <div class="desired-line" style="width: 500px"></div>
         <span class="ratio">
           <span class="shrink-amt">-90</span>/<span class="denom">30</span> = <span class="quotient">-3.0</span>
         </span>
